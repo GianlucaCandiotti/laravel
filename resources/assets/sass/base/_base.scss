@@ -1,0 +1,92 @@
+/* ==========================================================================
+   This file only targets tags directly and gives some basic styling to them.
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+  color: $dark-grey;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: normal;
+}
+
+::-webkit-input-placeholder {
+  color: $light-grey;
+}
+
+:-moz-placeholder {
+  color: $light-grey;
+  opacity: 1;
+}
+
+::-moz-placeholder {
+  color: $light-grey;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: $light-grey;
+}
+
+[type="search"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+
+body {
+  background-color: $body-background-color;
+  color: $body-color;
+  font-family: $body-font;
+  font-size: $body-font-size;
+  letter-spacing: 1px;
+  line-height: $body-line-height;
+  text-align: center;
+}
+
+strong {
+  font-weight: $font-weight-bold;
+}
+
+/* Horizontal lines */
+
+hr {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  @include clearfix();
+}
+
+/* Remove most spacing between table cells */
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}

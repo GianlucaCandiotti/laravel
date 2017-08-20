@@ -15,14 +15,32 @@ exports.cssLoaders = function (options) {
   var cssLoader = {
     loader: 'css-loader',
     options: {
+      importLoaders: 1,
       minimize: process.env.NODE_ENV === 'production',
       sourceMap: options.sourceMap
     }
   }
 
+  var postCssLoader = {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: options.sourceMap
+    }
+  }
+
   // generate loader string to be used with extract text plugin
-  function generateLoaders (loader, loaderOptions) {
-    var loaders = [cssLoader]
+  function generateLoaders (loader, loaderOptions, modules) {
+    var _cssLoader = Object.assign({}, cssLoader)
+
+    if (modules) {
+      _cssLoader.options = Object.assign({}, cssLoader.options, {
+        localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
+        modules: true
+      })
+    }
+
+    var loaders = [_cssLoader, postCssLoader]
+
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
@@ -51,6 +69,7 @@ exports.cssLoaders = function (options) {
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
+    scssm: generateLoaders('sass', null, true),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }
@@ -67,5 +86,10 @@ exports.styleLoaders = function (options) {
       use: loader
     })
   }
+
   return output
+}
+
+exports.resolve = function (dir) {
+  return path.join(__dirname, '..', dir)
 }

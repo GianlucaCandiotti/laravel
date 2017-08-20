@@ -1,0 +1,35 @@
+/* Breakpoints */
+
+$xs-max: 47.938em !default; // 767px
+$sm-min: 48.000em !default; // 768px
+$sm-max: 63.938em !default; // 1023px
+$md-min: 64.000em !default; // 1024px
+$md-max: 74.938em !default; // approx 1199px
+$lg-min: 75.000em !default; // approx 1200px
+
+/* Brand */
+
+$light-grey:         #c2b8bd !default;
+$dark-grey:          #96858d !default;
+$white:              #ffffff !default;
+$black:              #333333 !default;
+
+/* Background */
+
+$primary-background: $white !default;
+
+/* Fonts */
+
+$lh-condensed-ultra: 1 !default;
+$lh-default: 1.2 !default;
+
+$font-weight-bold: 600 !default;
+$font-weight-light: 300 !default;
+
+/* Body */
+
+$body-background-color: $primary-background;
+$body-color: $dark-grey;
+$body-font: 'Raleway', 'Roboto', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+$body-font-size: 16px !default;
+$body-line-height: $lh-default !default;

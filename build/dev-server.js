@@ -1,4 +1,5 @@
 require('./check-versions')()
+require('dotenv').config()
 
 var config = require('../client_config')
 if (!process.env.NODE_ENV) {
@@ -15,7 +16,7 @@ var webpackConfig = process.env.NODE_ENV === 'testing'
   : require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
-var port = process.env.PORT || config.dev.port
+var port = config.dev.port || 8080
 // automatically open browser, if not set will be false
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
@@ -23,6 +24,13 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+})
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -65,12 +73,16 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-var uri = 'http://localhost:' + port
+var uri = process.env.APP_DEV_URL
 
 var _resolve
 var readyPromise = new Promise(resolve => {
   _resolve = resolve
 })
+
+// inject the script tag in the base blade tamplate before
+// opening up the browser
+require('./inject-dev-template')
 
 console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
