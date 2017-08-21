@@ -10,9 +10,9 @@
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "postbuild": "node build/post-build.js",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    "unit": "cross-env BABEL_ENV=test karma start tests/js/unit/karma.conf.js --single-run",
     "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit/specs"
+    "lint": "eslint --ext .js,.vue src tests/js/unit/specs"
   },
   "dependencies": {
     "axios": "^0.16.2",
