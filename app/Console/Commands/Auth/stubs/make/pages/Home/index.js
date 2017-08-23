@@ -1,3 +1,4 @@
+import Laravel from 'utils/laravel';
 import NavBar from 'components/NavBar';
 import Panel from 'components/Panel';
 import Notification from 'components/Notification';
@@ -8,13 +9,13 @@ export default {
       <div>
         <NavBar />
         <section class="section">
-          {Laravel.status && (
-            <Notification type="success">
-              {Laravel.status}
-            </Notification>
-          )}
-
           <div class="container">
+            {Laravel.status && (
+              <Notification type="success">
+                {Laravel.status}
+              </Notification>
+            )}
+
             <Panel title="Dashboard">
               <div>
                 You are logged in!

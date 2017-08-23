@@ -44,8 +44,8 @@ class AuthMakeCommand extends Command
      * @var array
      */
     protected $injectors = [
-        'injectors/status.stub' => 'injectors/status.blade.php',
-        'injectors/token.stub' => 'injectors/token.blade.php',
+        'status.stub' => 'injectors/status.blade.php',
+        'token.stub' => 'injectors/token.blade.php',
     ];
 
     /**
@@ -132,35 +132,30 @@ class AuthMakeCommand extends Command
      *
      * @return void
      */
-    function copyDirectory($dirArr, $sourcePath, $destinationPath) {
-        foreach ($dirArr as $value) {
-            $source = $sourcePath . $value;
-            $destination = $destinationPath . $value;
+    function copyDirectory($source, $destination) {
+        if (is_dir($source)) {
+            @mkdir($destination);
 
-            if (is_dir($source)) {
-                @mkdir($destination);
+            $directory = dir($source);
 
-                $directory = dir($source);
-
-                while (FALSE !== ($read_directory = $directory->read())) {
-                    if ($read_directory == '.' || $read_directory == '..') {
-                        continue;
-                    }
-
-                    $path_dir = $source . '/' . $read_directory;
-
-                    if (is_dir( $path_dir)) {
-                        $this->copyDirectory($path_dir, $destination . '/' . $read_directory);
-                        continue;
-                    }
-
-                    copy($path_dir, $destination . '/' . $read_directory);
+            while (FALSE !== ($read_directory = $directory->read())) {
+                if ($read_directory == '.' || $read_directory == '..') {
+                    continue;
                 }
 
-                $directory->close();
-            } else {
-                copy($source, $destination);
+                $path_dir = $source . '/' . $read_directory;
+
+                if (is_dir( $path_dir)) {
+                    $this->copyDirectory($path_dir, $destination . '/' . $read_directory);
+                    continue;
+                }
+
+                copy($path_dir, $destination . '/' . $read_directory);
             }
+
+            $directory->close();
+        } else {
+            copy($source, $destination);
         }
     }
 
@@ -211,11 +206,12 @@ class AuthMakeCommand extends Command
      */
     protected function exportPages()
     {
-        $this->copyDirectory(
-            $this->pages,
-            __DIR__.'/stubs/make/pages/',
-            base_path('resources/assets/js/pages/')
-        );
+        foreach ($this->pages as $value) {
+            $this->copyDirectory(
+                __DIR__.'/stubs/make/pages/'.$value,
+                base_path('resources/assets/js/pages/'.$value)
+            );
+        }
     }
 
     /**
@@ -225,11 +221,12 @@ class AuthMakeCommand extends Command
      */
     protected function exportComponents()
     {
-        $this->copyDirectory(
-            $this->components,
-            __DIR__.'/stubs/make/components/',
-            base_path('resources/assets/js/components/')
-        );
+        foreach ($this->components as $value) {
+            $this->copyDirectory(
+                __DIR__.'/stubs/make/components/'.$value,
+                base_path('resources/assets/js/components/'.$value)
+            );
+        }
     }
 
     /**
