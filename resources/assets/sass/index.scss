@@ -1,20 +1,5 @@
-// Vendors
+@charset "utf-8";
 
-@import "vendors/bulma";
-
-// Commons
-
-@import "commons/index";
-
-// Commons
-
-@import "utils/animations";
-
-// Base
-
-@import "base/base";
-@import "base/typography";
-
-// Theme
-
-@import "theme/theme";
+@import "vendors/index";
+@import "utils/index";
+@import "base/index";

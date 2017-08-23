@@ -13,7 +13,7 @@ const Hello = {
     } = this.$data;
 
     return (
-      <div class={`${styles.content} anim-fade-down`}>
+      <div class={`${styles.root} animated fadeInDown`}>
         <h1 class={styles.title}>
           {title}
         </h1>

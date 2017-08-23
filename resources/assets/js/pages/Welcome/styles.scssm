@@ -1,8 +1,9 @@
-@import "~sass/commons/index";
+@import "~sass/utils/index";
 
 .root {
   background-color: $white;
-  color: $dark-grey;
+  color: $dark;
+  font-family: 'Raleway';
   font-weight: 100;
 }
 
@@ -22,7 +23,7 @@
 }
 
 .link {
-  color: $dark-grey;
+  color: $dark;
   cursor: pointer;
   display: block;
   font-size: 12px;

@@ -1,6 +1,6 @@
-@import "~sass/commons/index";
+@import "~sass/utils/index";
 
-.content {
+.root {
   text-align: center;
 }
 
@@ -9,7 +9,7 @@
   font-weight: 400;
   margin: 0 0 30px;
 
-  @include breakpoint(md) {
+  @include desktop {
     font-size: 84px;
   }
 }
@@ -17,7 +17,7 @@
 .links {
   margin-top: 50px;
 
-  @include breakpoint(md) {
+  @include desktop {
     align-items: center;
     display: flex;
     justify-content: center;
@@ -25,7 +25,7 @@
 }
 
 .link {
-  color: $dark-grey;
+  color: $dark;
   cursor: pointer;
   display: block;
   font-size: 12px;

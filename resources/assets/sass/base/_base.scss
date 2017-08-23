@@ -10,28 +10,28 @@ input,
 select,
 textarea,
 button {
-  color: $dark-grey;
+  color: $dark;
   font-family: inherit;
   font-size: 18px;
   line-height: normal;
 }
 
 ::-webkit-input-placeholder {
-  color: $light-grey;
+  color: $grey-lighter;
 }
 
 :-moz-placeholder {
-  color: $light-grey;
+  color: $grey-lighter;
   opacity: 1;
 }
 
 ::-moz-placeholder {
-  color: $light-grey;
+  color: $grey-lighter;
   opacity: 1;
 }
 
 :-ms-input-placeholder {
-  color: $light-grey;
+  color: $grey-lighter;
 }
 
 [type="search"] {
@@ -45,13 +45,12 @@ body {
   color: $body-color;
   font-family: $body-font;
   font-size: $body-font-size;
-  letter-spacing: 1px;
   line-height: $body-line-height;
   text-align: center;
 }
 
 strong {
-  font-weight: $font-weight-bold;
+  font-weight: 600;
 }
 
 /* Horizontal lines */
@@ -59,7 +58,7 @@ strong {
 hr {
   background: transparent;
   border: 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: $grey-lighter;
   height: 0;
   margin: 15px 0;
   overflow: hidden;
