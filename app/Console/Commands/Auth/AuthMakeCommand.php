@@ -39,6 +39,16 @@ class AuthMakeCommand extends Command
     ];
 
     /**
+     * The injectors that need to be exported.
+     *
+     * @var array
+     */
+    protected $injectors = [
+        'injectors/status.stub' => 'injectors/status.blade.php',
+        'injectors/token.stub' => 'injectors/token.blade.php',
+    ];
+
+    /**
      * The page components that need to be exported.
      *
      * @var array
@@ -52,6 +62,17 @@ class AuthMakeCommand extends Command
     ];
 
     /**
+     * The components that need to be exported.
+     *
+     * @var array
+     */
+    protected $components = [
+        'NavBar',
+        'Notification',
+        'Panel',
+    ];
+
+    /**
      * Execute the console command.
      *
      * @return void
@@ -61,7 +82,9 @@ class AuthMakeCommand extends Command
         $this->createDirectories();
 
         $this->exportViews();
+        $this->exportInjectors();
         $this->exportPages();
+        $this->exportComponents();
 
         if (! $this->option('views')) {
             file_put_contents(
@@ -90,8 +113,54 @@ class AuthMakeCommand extends Command
             mkdir(base_path('resources/views/auth/passwords'), 0755, true);
         }
 
+        if (! is_dir(base_path('resources/views/injectors'))) {
+            mkdir(base_path('resources/views/injectors'), 0755, true);
+        }
+
         if (! is_dir(base_path('resources/assets/js/pages'))) {
             mkdir(base_path('resources/assets/js/pages'), 0755, true);
+        }
+
+        if (! is_dir(base_path('resources/assets/js/components'))) {
+            mkdir(base_path('resources/assets/js/components'), 0755, true);
+        }
+    }
+
+    /**
+     * Utility function for copying the whole contents of a directory
+     * into another.
+     *
+     * @return void
+     */
+    function copyDirectory($dirArr, $sourcePath, $destinationPath) {
+        foreach ($dirArr as $value) {
+            $source = $sourcePath . $value;
+            $destination = $destinationPath . $value;
+
+            if (is_dir($source)) {
+                @mkdir($destination);
+
+                $directory = dir($source);
+
+                while (FALSE !== ($read_directory = $directory->read())) {
+                    if ($read_directory == '.' || $read_directory == '..') {
+                        continue;
+                    }
+
+                    $path_dir = $source . '/' . $read_directory;
+
+                    if (is_dir( $path_dir)) {
+                        $this->copyDirectory($path_dir, $destination . '/' . $read_directory);
+                        continue;
+                    }
+
+                    copy($path_dir, $destination . '/' . $read_directory);
+                }
+
+                $directory->close();
+            } else {
+                copy($source, $destination);
+            }
         }
     }
 
@@ -115,31 +184,23 @@ class AuthMakeCommand extends Command
         }
     }
 
-
-    function copyDirectory($source, $destination) {
-        if (is_dir($source)) {
-            @mkdir($destination);
-
-            $directory = dir($source);
-
-            while (FALSE !== ($read_directory = $directory->read())) {
-                if ($read_directory == '.' || $read_directory == '..') {
+    /**
+     * Export the injectors.
+     *
+     * @return void
+     */
+    protected function exportInjectors()
+    {
+        foreach ($this->injectors as $key => $value) {
+            if (file_exists(resource_path('views/'.$value)) && ! $this->option('force')) {
+                if (! $this->confirm("The [{$value}] injector already exists. Do you want to replace it?")) {
                     continue;
                 }
-
-                $path_dir = $source . '/' . $read_directory;
-
-                if (is_dir( $path_dir)) {
-                    $this->copyDirectory($path_dir, $destination . '/' . $read_directory);
-                    continue;
-                }
-
-                copy($path_dir, $destination . '/' . $read_directory);
             }
-
-            $directory->close();
-        } else {
-            copy($source, $destination);
+            copy(
+                __DIR__.'/stubs/make/injectors/'.$key,
+                resource_path('views/'.$value)
+            );
         }
     }
 
@@ -150,12 +211,25 @@ class AuthMakeCommand extends Command
      */
     protected function exportPages()
     {
-        foreach ($this->pages as $value) {
-            $this->copyDirectory(
-                __DIR__.'/stubs/make/pages/'.$value,
-                base_path('resources/assets/js/pages/'.$value)
-            );
-        }
+        $this->copyDirectory(
+            $this->pages,
+            __DIR__.'/stubs/make/pages/',
+            base_path('resources/assets/js/pages/')
+        );
+    }
+
+    /**
+     * Export the components.
+     *
+     * @return void
+     */
+    protected function exportComponents()
+    {
+        $this->copyDirectory(
+            $this->components,
+            __DIR__.'/stubs/make/components/',
+            base_path('resources/assets/js/components/')
+        );
     }
 
     /**

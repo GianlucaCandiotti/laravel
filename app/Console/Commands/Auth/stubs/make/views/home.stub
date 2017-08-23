@@ -2,4 +2,6 @@
 
 @section('content')
 <div id="home"></div>
+
+@include('injectors.status')
 @endsection
