@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "prwlr/laravue",
+    "description": "A Laravel template heavily inspired by the Vue.js webpack template.",
+    "keywords": ["framework", "laravel", "vue.js"],
     "license": "MIT",
     "type": "project",
     "require": {
