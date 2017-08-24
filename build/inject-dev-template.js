@@ -4,7 +4,7 @@ var utils = require('./utils')
 
 replace({
   regex: '__DEV_SCRIPT__',
-  replacement: '<script src="http://laravue.dev:8080/app.js"></script>',
+  replacement: '<script src="' + config.dev.assetsPublicPath + 'app.js"></script>',
   paths: [config.build.index],
   silent: true
 })
