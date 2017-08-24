@@ -15,7 +15,7 @@ export default {
 
     return (
       <div class={`columns ${styles.root}`}>
-        <div class="box column is-8 is-offset-2">
+        <div class="box column is-8 is-offset-2 is-half-fullhd is-offset-one-quarter-fullhd">
           {title && (
             <div class={styles.titleContainer}>
               <h1 class="title is-4">
