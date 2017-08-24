@@ -1,0 +1,37 @@
+@import "~sass/utils/index";
+
+.root {
+  text-align: center;
+}
+
+.title {
+  font-size: 64px;
+  font-weight: 400;
+  margin: 0 0 30px;
+
+  @include desktop {
+    font-size: 84px;
+  }
+}
+
+.links {
+  margin-top: 50px;
+
+  @include desktop {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.link {
+  color: $dark;
+  cursor: pointer;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  margin: 25px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}

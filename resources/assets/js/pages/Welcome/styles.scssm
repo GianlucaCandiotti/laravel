@@ -1,0 +1,35 @@
+@import "~sass/utils/index";
+
+.root {
+  background-color: $white;
+  color: $dark;
+  font-family: 'Raleway';
+  font-weight: 100;
+}
+
+.contentWrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 100vh;
+}
+
+.authLinks {
+  display: flex;
+  position: absolute;
+  right: 10px;
+  top: 18px;
+}
+
+.link {
+  color: $dark;
+  cursor: pointer;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  margin: 25px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}

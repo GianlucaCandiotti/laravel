@@ -1,0 +1,12 @@
+@import "~sass/utils/index";
+
+.root {
+  margin-top: 3rem;
+}
+
+.titleContainer {
+  border-bottom: 1px solid $grey-lighter;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  text-align: left;
+}

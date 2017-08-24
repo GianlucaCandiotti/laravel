@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravue') }}</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+        <!--
+            Global Variables
+            Currently creates a global variable called Laravel with the following properties:
+                csrfToken -> String with csrf token. Same as csrf_token().
+                baseUrl -> String with the base path of the application. Same as url('').
+                isGuest -> Boolean to verify whether a user is a guest or not.
+                user -> Object with Auth::user()->name and Auth::user()->email. Only available if a User is authenticated.
+                errors -> Array with Laravel errors for each key.
+                oldInputs -> Array with old inputs.
+        -->
+        @include('globals')
+    </head>
+    <body>
+        <div class="body-content">
+            @yield('content')
+        </div>
+
+        __DEV_SCRIPT__
+    </body>
+</html>
