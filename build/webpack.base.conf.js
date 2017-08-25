@@ -1,3 +1,5 @@
+require('babel-polyfill')
+
 var path = require('path')
 var utils = require('./utils')
 var config = require('../client_config')
