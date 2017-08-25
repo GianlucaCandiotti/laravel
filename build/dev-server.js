@@ -33,7 +33,7 @@ app.use(function(req, res, next) {
 
 var compiler = webpack(webpackConfig)
 
-var watchOptions = config.dev.polling
+var watchOptions = process.env.APP_DEV_POLLING === 'TRUE'
   ?
     {
       watchOptions: {
@@ -43,15 +43,15 @@ var watchOptions = config.dev.polling
     }
   : {}
 
-var devMiddleware = require('webpack-dev-middleware')(compiler, {
+var devMiddleware = require('webpack-dev-middleware')(compiler, Object.assign({}, {
   publicPath: webpackConfig.output.publicPath,
   quiet: true
-})
+}, watchOptions))
 
-var hotMiddleware = require('webpack-hot-middleware')(compiler, Object.assign({}, {
+var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: false,
   heartbeat: 2000
-}, watchOptions))
+})
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {

@@ -27,7 +27,6 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: process.env.APP_DEV_URL + ':' + process.env.APP_DEV_PORT + '/',
-    polling: false,
     proxyTable: {},
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
