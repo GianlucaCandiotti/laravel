@@ -10,8 +10,8 @@ paths.keys().filter(path => path !== './index.js').forEach((path) => {
     !i
       ? char.toLowerCase()
       : char.toUpperCase() === char
-      ? `-${char.toLowerCase()}`
-      : char
+        ? `-${char.toLowerCase()}`
+        : char
   )).join``;
 
   const mountPoint = document.getElementById(selector);
