@@ -61,6 +61,8 @@ There is a command for testing which is `yarn test || npm run test`, but it does
 
 There is a folder called `client_config` which has some objects needed for the build and dev configurations. Most of them you don't need to worry about, but there are some that could be useful. For example you can set `cssSourceMap` to `true` to generate source maps in development. Is not activated by default because relative paths are "buggy" (A more detailed explanation can be found in a comment in the file). To know more about the options refer to the [vuejs-templates webpack docs](http://vuejs-templates.github.io/webpack).
 
+In the .env file you can also set a the `APP_DEV_POLLING` to `TRUE` in order to enable polling in the webpack dev config. This is useful when running the project with Homestead for example.
+
 ## Notes
 
 Laravel adds some useful stuff to a global Javascript variable called `Laravel`. I added some more stuff to it like the error bag and the old inputs. There is an `utils` folder where I created a file called `laravel` that just pulls in the global variable and exports it. Then in my Vue components I can import it to make calls to that variable a little bit cleaner.
