@@ -34,7 +34,7 @@ Homestead.yaml
 
 # dotenv environment variables file(s)
 .env
-.env.*
+!.env.*
 
 #Build generated
 dist/
