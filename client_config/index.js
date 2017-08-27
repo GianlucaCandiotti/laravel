@@ -1,5 +1,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
+require('dotenv').config()
 var path = require('path')
+
+var EXPRESS_APP_URL = process.env.APP_URL.replace(/:[0-9]+/g, '')
 
 module.exports = {
   build: {
@@ -23,10 +26,12 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: process.env.APP_DEV_PORT,
+    url: process.env.APP_URL,
+    port: process.env.DEV_PORT,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
-    assetsPublicPath: process.env.APP_DEV_URL + ':' + process.env.APP_DEV_PORT + '/',
+    assetsPublicPath: EXPRESS_APP_URL + ':' + process.env.DEV_PORT + '/',
+    polling: process.env.DEV_POLLING,
     proxyTable: {},
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

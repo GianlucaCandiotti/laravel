@@ -1,5 +1,4 @@
 require('./check-versions')()
-require('dotenv').config()
 
 var config = require('../client_config')
 if (!process.env.NODE_ENV) {
@@ -33,7 +32,7 @@ app.use(function(req, res, next) {
 
 var compiler = webpack(webpackConfig)
 
-var watchOptions = process.env.APP_DEV_POLLING === 'TRUE'
+var watchOptions = config.dev.polling === 'TRUE'
   ?
     {
       watchOptions: {
@@ -83,7 +82,7 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-var uri = process.env.APP_DEV_URL
+var uri = config.dev.url
 
 var _resolve
 var readyPromise = new Promise(resolve => {
